@@ -1,0 +1,7 @@
+.popup__container {
+  position: relative;
+}
+
+.popup__container:hover {
+  cursor: initial;
+}

@@ -1,0 +1,22 @@
+.profile__job {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 0;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .profile__job {
+    margin-top: 8px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .profile__job {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

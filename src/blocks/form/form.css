@@ -1,0 +1,24 @@
+@import url(./__heading/form__heading.css);
+@import url(./__label/form__label.css);
+@import url(./__field/form__field.css);
+@import url(./__field/form__field_type_error/form__field_type_error.css);
+@import url(./__field-error/form__field-error.css);
+@import url(./__field-error/_active/form__field-error_active.css);
+@import url(./__submit-button/form__submit-button.css);
+@import url(./__submit-button/_type/form__submit-button_type_delete-card.css);
+
+.form {
+  flex-direction: column;
+  padding: 30px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+  width: calc((100vw * 0.75) - 60px);
+}
+
+@media (min-width: 768px) {
+  .form {
+    padding: 36px;
+    width: 400px;
+  }
+}

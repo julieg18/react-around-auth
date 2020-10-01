@@ -1,0 +1,9 @@
+.element__likes-num {
+  grid-area: likes-num;
+  margin: 3px 0 0 auto;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  width: 21px;
+}

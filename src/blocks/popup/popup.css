@@ -1,0 +1,21 @@
+@import url(./__container/popup__container.css);
+@import url(./__exit-button/popup__exit-button.css);
+
+.popup {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity ease-in-out 0.2s, visibility ease-in-out 0.2s;
+}
+
+.popup:hover {
+  cursor: pointer;
+}
