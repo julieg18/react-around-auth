@@ -5,8 +5,8 @@
   background-repeat: no-repeat;
   border: none;
   position: absolute;
-  right: -27px;
-  top: -27px;
+  right: calc(50% - 12.5px);
+  top: -45px;
   height: 25px;
   width: 25px;
 }
