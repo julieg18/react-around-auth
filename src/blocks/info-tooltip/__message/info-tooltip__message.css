@@ -1,0 +1,14 @@
+.info-tooltip__message {
+  margin: 40px 0 0;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000;
+}
+
+@media (min-width: 768px) {
+  .info-tooltip__message {
+    margin: 32px 0 0;
+  }
+}
