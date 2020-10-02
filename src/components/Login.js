@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
-function Login() {
+function Login({ onLoginUser }) {
+  const history = useHistory();
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
@@ -33,6 +34,14 @@ function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
+    onLoginUser()
+      .then(() => {
+        history.push('/');
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   }
 
   return (

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
-function Register() {
+function Register({ onRegisterUser }) {
+  const history = useHistory();
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
@@ -37,6 +38,14 @@ function Register() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
+    onRegisterUser()
+      .then(() => {
+        history.push('/signin');
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -99,7 +108,7 @@ function Register() {
           {isLoading ? 'Saving...' : 'Sign up'}
         </button>
         <Link className="form__link" to="/signin">
-          Not a member yet? Log in here!
+          Already a member? Log in here!
         </Link>
       </form>
     </div>
