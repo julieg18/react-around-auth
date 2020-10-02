@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from './Header';
 import ProtectedRoute from './ProtectedRoute';
+import Login from './Login';
+import Register from './Register';
 import Main from './Main';
 import Footer from './Footer';
 import ImagePopup from './ImagePopup';
@@ -135,10 +137,10 @@ function App() {
         {!isUserLoggedIn && (
           <>
             <Route path="/signup">
-              <div className="">SIGN UP HERE</div>
+              <Register />
             </Route>
             <Route path="/signin">
-              <div className="">SIGN IN HERE</div>
+              <Login />
             </Route>
           </>
         )}
