@@ -16,7 +16,7 @@
   background-color: #fff;
   color: #000;
   border-radius: 10px;
-  width: calc((100vw * 0.75) - 60px);
+  width: 70vw;
 }
 
 @media (min-width: 768px) {
