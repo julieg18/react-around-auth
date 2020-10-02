@@ -31,7 +31,6 @@ function Register() {
         : input.validationMessage;
     setPassword(input.value);
     setIsPasswordValid(isValid);
-    console.log(input.validationMessage);
     setPasswordValidationMessage(message);
     setIsFormValid(isEmailValid && isValid && email !== '');
   }
