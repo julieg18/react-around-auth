@@ -61,7 +61,7 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
           defaultValue={name}
           type="text"
           className={`form__field form__field_type_name ${
-            !isNameValid && 'form__field_type_error'
+            !isNameValid && 'form__field_invalid'
           }`}
           id="name-field"
           minLength="2"
@@ -84,7 +84,7 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
           defaultValue={description}
           type="text"
           className={`form__field form__field_type_job ${
-            !isDescriptionValid && 'form__field_type_error'
+            !isDescriptionValid && 'form__field_invalid'
           }`}
           id="job-field"
           minLength="2"

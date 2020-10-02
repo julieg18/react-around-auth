@@ -1,6 +1,7 @@
 .form__label {
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .form__label:first-of-type {

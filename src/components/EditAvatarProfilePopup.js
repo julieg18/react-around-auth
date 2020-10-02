@@ -42,7 +42,7 @@ function EditAvatarProfilePopup({ isOpen, onClose, onUpdateAvatar }) {
           placeholder="Image-link"
           type="url"
           className={`form__field form__field_type_avatar-img ${
-            !isAvatarValid && 'form__field_type_error'
+            !isAvatarValid && 'form__field_invalid'
           }`}
           id="avatar-img-field"
           onChange={handleAvatarInputChange}

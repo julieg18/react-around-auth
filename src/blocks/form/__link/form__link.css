@@ -1,0 +1,22 @@
+.form__link {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: inherit;
+  margin: 20px 0 0;
+  text-decoration: none;
+  transition: opacity linear 0.2s;
+}
+
+.form__link:hover {
+  opacity: 0.6;
+}
+
+@media (min-width: 768px) {
+  .form__link {
+    margin: 15px 0 0;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

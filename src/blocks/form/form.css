@@ -1,11 +1,14 @@
 @import url(./__heading/form__heading.css);
 @import url(./__label/form__label.css);
 @import url(./__field/form__field.css);
-@import url(./__field/form__field_type_error/form__field_type_error.css);
+@import url(./__field/_dark/form__field_dark.css);
+@import url(./__field/_invalid/form__field_invalid.css);
 @import url(./__field-error/form__field-error.css);
 @import url(./__field-error/_active/form__field-error_active.css);
 @import url(./__submit-button/form__submit-button.css);
 @import url(./__submit-button/_type/form__submit-button_type_delete-card.css);
+@import url(./__submit-button/_dark/form__submit-button_dark.css);
+@import url(./__link/form__link.css);
 
 .form {
   flex-direction: column;

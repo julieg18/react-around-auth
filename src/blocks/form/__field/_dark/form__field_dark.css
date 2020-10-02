@@ -1,0 +1,20 @@
+.form__field_dark {
+  background-color: inherit;
+  border-bottom: 1px solid #ccc;
+}
+
+.form__field_dark::placeholder {
+  color: #ccc;
+}
+
+.form__field_dark::-webkit-input-placeholder {
+  color: #ccc;
+}
+
+.form__field_dark::-moz-placeholder {
+  color: #ccc;
+}
+
+.form__field_dark::-ms-input-placeholder {
+  color: #ccc;
+}

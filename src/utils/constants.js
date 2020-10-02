@@ -8,7 +8,7 @@ const settingsObject = {
   inputSelector: '.form__field',
   submitButtonSelector: '.form__submit-button',
   inactiveButtonClass: 'form__submit-button_inactive',
-  inputErrorClass: 'form__field_type_error',
+  inputErrorClass: 'form__field_invalid',
   errorClass: 'form__field-error_active',
 };
 

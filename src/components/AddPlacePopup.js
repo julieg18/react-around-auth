@@ -55,7 +55,7 @@ function AddPlacePopup({ isOpen, onClose, onCreatePlace }) {
           placeholder="Title"
           type="text"
           className={`form__field form__field_type_title ${
-            !isNameValid && 'form__field_type_error'
+            !isNameValid && 'form__field_invalid'
           }`}
           id="title-field"
           minLength="2"
@@ -78,7 +78,7 @@ function AddPlacePopup({ isOpen, onClose, onCreatePlace }) {
           type="url"
           value={link}
           className={`form__field form__field_type_img-link ${
-            !isLinkValid && 'form__field_type_error'
+            !isLinkValid && 'form__field_invalid'
           }`}
           id="img-link-field"
           required
