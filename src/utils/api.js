@@ -89,6 +89,43 @@ class Api {
         console.log(err);
       });
   }
+
+  registerUser(userInfo) {
+    return fetch(`${this._baseUrl}/signup`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(userInfo),
+    })
+      .then(this._checkServerResponse)
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  loginUser(userInfo) {
+    return fetch(`${this._baseUrl}/signin`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(userInfo),
+    })
+      .then(this._checkServerResponse)
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  checkUserValidity() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      },
+    })
+      .then(this._checkServerResponse)
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
 
 const api = new Api({
@@ -99,4 +136,11 @@ const api = new Api({
   },
 });
 
-export default api;
+const authenticationApi = new Api({
+  baseUrl: 'https://register.nomoreparties.co',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+export { api, authenticationApi };
