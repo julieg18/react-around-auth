@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-function Register({ onRegisterUser }) {
-  const history = useHistory();
+function Register({ onRegister }) {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
@@ -39,13 +38,9 @@ function Register({ onRegisterUser }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    onRegisterUser()
-      .then(() => {
-        history.push('/signin');
-      })
-      .catch(() => {
-        setIsLoading(false);
-      });
+    onRegister({ email, password }).catch(() => {
+      setIsLoading(false);
+    });
   }
 
   return (
@@ -105,7 +100,7 @@ function Register({ onRegisterUser }) {
           className="form__submit-button form__submit-button_dark form__submit-button_type_edit-profile"
           disabled={!isFormValid}
         >
-          {isLoading ? 'Saving...' : 'Sign up'}
+          {isLoading ? 'Loading...' : 'Sign up'}
         </button>
         <Link className="form__link" to="/signin">
           Already a member? Log in here!
