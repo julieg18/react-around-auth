@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import Header from './Header';
 import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
@@ -11,18 +11,23 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarProfilePopup from './EditAvatarProfilePopup';
 import AddPlacePopup from './AddPlacePopup';
 import DeleteCardPopup from './DeleteCardPopup';
+import InfoTooltip from './InfoTooltip';
 import CurrentUserContext from '../contexts/CurrentUserContext';
-import api from '../utils/api';
+import { api, authenticationApi } from '../utils/api';
 
 function App() {
+  const history = useHistory();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
+  const [isSuccessTooltipOpen, setIsSuccessTooltipOpen] = useState(false);
+  const [isErrorTooltipOpen, setIsErrorTooltipOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
+  const [email, setEmail] = useState('');
   const [cards, setCards] = useState([]);
 
   const useMountEffect = (func) => useEffect(func, []);
@@ -35,7 +40,19 @@ function App() {
     api.getInitialCards().then((initialCards) => {
       setCards(initialCards);
     });
+
+    if (localStorage.getItem('jwt')) {
+      checkUserValidity();
+    }
   });
+
+  function checkUserValidity() {
+    authenticationApi.checkUserValidity().then(({ data: { email } }) => {
+      setEmail(email);
+      setIsUserLoggedIn(true);
+      history.push('/');
+    });
+  }
 
   function handleEscPopupClose(e) {
     if (e.key === 'Escape') {
@@ -43,31 +60,45 @@ function App() {
     }
   }
 
-  function handleEditAvatarClick() {
+  function setEscPopupCloseEventListener() {
     window.addEventListener('keyup', handleEscPopupClose);
+  }
+
+  function handleEditAvatarClick() {
+    setEscPopupCloseEventListener();
     setIsEditAvatarPopupOpen(true);
   }
 
   function handleEditProfileClick() {
-    window.addEventListener('keyup', handleEscPopupClose);
+    setEscPopupCloseEventListener();
     setIsEditProfilePopupOpen(true);
   }
 
   function handleAddPlaceClick() {
-    window.addEventListener('keyup', handleEscPopupClose);
+    setEscPopupCloseEventListener();
     setIsAddPlacePopupOpen(true);
   }
 
   function handleCardClick(card) {
     setSelectedCard(card);
-    window.addEventListener('keyup', handleEscPopupClose);
+    setEscPopupCloseEventListener();
     setIsImagePopupOpen(true);
   }
 
   function handleDeleteCardClick(card) {
     setSelectedCard(card);
-    window.addEventListener('keyup', handleEscPopupClose);
+    setEscPopupCloseEventListener();
     setIsDeleteCardPopupOpen(true);
+  }
+
+  function openErrorTooltip() {
+    setEscPopupCloseEventListener();
+    setIsErrorTooltipOpen(true);
+  }
+
+  function openSuccessTooltip() {
+    setEscPopupCloseEventListener();
+    setIsSuccessTooltipOpen(true);
   }
 
   function closeAllPopups() {
@@ -77,6 +108,41 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsImagePopupOpen(false);
     setIsDeleteCardPopupOpen(false);
+    setIsErrorTooltipOpen(false);
+    setIsSuccessTooltipOpen(false);
+  }
+
+  function handleUserLogin(userInfo) {
+    return authenticationApi
+      .loginUser(userInfo)
+      .then(({ token }) => {
+        localStorage.setItem('jwt', token);
+        return checkUserValidity();
+      })
+      .catch(() => {
+        openErrorTooltip();
+        return Promise.reject();
+      });
+  }
+
+  function handleUserRegister(userInfo) {
+    return authenticationApi
+      .registerUser(userInfo)
+      .then(() => {
+        return handleUserLogin(userInfo);
+      })
+      .then(() => {
+        openSuccessTooltip();
+      })
+      .catch(() => {
+        openErrorTooltip();
+        return Promise.reject();
+      });
+  }
+
+  function handleUserSignout() {
+    localStorage.removeItem('jwt');
+    setIsUserLoggedIn(false);
   }
 
   function handleCardLike(card) {
@@ -119,7 +185,11 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Header />
+      <Header
+        onSignOut={handleUserSignout}
+        isUserLoggedIn={isUserLoggedIn}
+        email={email}
+      />
       <Switch>
         <ProtectedRoute
           path="/"
@@ -134,21 +204,18 @@ function App() {
           onCardClick={handleCardClick}
           onCardLike={handleCardLike}
         />
-        {!isUserLoggedIn && (
-          <>
-            <Route path="/signup">
-              <Register />
-            </Route>
-            <Route path="/signin">
-              <Login />
-            </Route>
-          </>
-        )}
+        <Route path="/signup">
+          <Register onRegister={handleUserRegister} />
+        </Route>
+        <Route path="/signin">
+          <Login onLogin={handleUserLogin} />
+        </Route>
         <Route>
           <Redirect to={isUserLoggedIn ? '/' : '/signin'} />
         </Route>
       </Switch>
       {isUserLoggedIn && <Footer />}
+
       <EditProfilePopup
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
@@ -177,6 +244,18 @@ function App() {
         isOpen={isDeleteCardPopupOpen}
         onClose={closeAllPopups}
         onDeleteCard={handleCardDelete}
+      />
+
+      <InfoTooltip
+        onClose={closeAllPopups}
+        type="success"
+        isOpen={isSuccessTooltipOpen}
+      />
+
+      <InfoTooltip
+        onClose={closeAllPopups}
+        type="error"
+        isOpen={isErrorTooltipOpen}
       />
     </CurrentUserContext.Provider>
   );
