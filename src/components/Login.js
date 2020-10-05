@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-function Login({ onLoginUser }) {
-  const history = useHistory();
+function Login({ onLogin }) {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
@@ -35,13 +34,9 @@ function Login({ onLoginUser }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    onLoginUser()
-      .then(() => {
-        history.push('/');
-      })
-      .catch(() => {
-        setIsLoading(false);
-      });
+    onLogin({ email, password }).catch(() => {
+      setIsLoading(false);
+    });
   }
 
   return (
@@ -95,7 +90,7 @@ function Login({ onLoginUser }) {
           className="form__submit-button form__submit-button_dark form__submit-button_type_edit-profile"
           disabled={!isFormValid}
         >
-          {isLoading ? 'Saving...' : 'Log in'}
+          {isLoading ? 'Loading...' : 'Log in'}
         </button>
         <Link className="form__link" to="/signup">
           Not a member yet? Sign up here!
