@@ -2,7 +2,10 @@
 @import url(./font/inter.css);
 @import url(./blocks/page/page.css);
 @import url(./blocks/header/header.css);
+@import url(./blocks/header/_nav-items-opened/header__nav-items-opened.css);
+@import url(./blocks//hover-animation/hover-animation.css);
 @import url(./blocks/logo/logo.css);
+@import url(./blocks/logo/_place/logo_place_header.css);
 @import url(./blocks/profile/profile.css);
 @import url(./blocks/button/button.css);
 @import url(./blocks/elements/elements.css);

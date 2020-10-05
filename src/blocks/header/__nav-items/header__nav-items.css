@@ -1,0 +1,27 @@
+.header__nav-items {
+  align-items: center;
+  background-color: #000;
+  border-bottom: 1px solid rgba(207, 179, 179, 0.7);
+  display: flex;
+  flex-flow: column;
+  height: 140px;
+  justify-content: center;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: -141px;
+  transition: top ease-in-out 0.3s;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .header__nav-items {
+    border: none;
+    flex-flow: row;
+    height: inherit;
+    position: static;
+    width: inherit;
+  }
+}

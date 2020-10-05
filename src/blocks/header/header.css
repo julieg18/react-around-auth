@@ -1,10 +1,25 @@
+@import url(./__nav-items-btn/header__nav-items-btn.css);
+@import url(./__nav-items-btn/_image/header__nav-items-btn_image_menu.css);
+@import url(./__nav-items-btn/_image/header__nav-items-btn_image_exit.css);
+@import url(./__nav-items/header__nav-items.css);
+@import url(./__nav-items/_opened/header__nav-items_opened.css);
+@import url(./__nav-item/header__nav-item.css);
+@import url(./__user-email/header__user-email.css);
+@import url(./__logout-btn/header__logout-btn.css);
+@import url(./__link/header__link.css);
+
 .header {
-  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
-  padding: 28px 0 32px;
+  align-items: center;
+  border-bottom: 1px solid rgba(207, 179, 179, 0.7);
+  display: flex;
+  padding: 28px 30px 32px;
+  position: relative;
+  transition: padding-top ease-in-out 0.3s;
 }
 
 @media (min-width: 1280px) {
   .header {
-    padding: 45px 0 40px;
+    margin-top: 17px;
+    padding: 28px 0 40px;
   }
 }
