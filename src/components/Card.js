@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import escape from 'escape-html';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Card({ onCardDelete, onCardLike, onCardClick, card }) {
@@ -34,12 +35,12 @@ function Card({ onCardDelete, onCardLike, onCardClick, card }) {
       ></button>
       <img
         className="element__image"
-        alt={name}
+        alt={escape(name)}
         src={link}
         onClick={handleClick}
       />
       <div className="element__info">
-        <p className="element__title">{name}</p>
+        <p className="element__title">{escape(name)}</p>
         <button
           onClick={handleLikeClick}
           className={`button element__like-button ${

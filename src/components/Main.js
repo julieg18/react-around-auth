@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import escape from 'escape-html';
 import Card from './Card';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import avatarImage from '../images/avatar-image.jpg';
@@ -19,7 +20,7 @@ function Main({
       <section className="profile">
         <div className="profile__avatar">
           <img
-            src={avatar || avatarImage}
+            src={escape(avatar) || avatarImage}
             alt="avatar"
             className="profile__avatar-img"
           />
@@ -29,12 +30,12 @@ function Main({
           ></button>
         </div>
         <div className="profile__info">
-          <p className="profile__name">{name}</p>
+          <p className="profile__name">{escape(name)}</p>
           <button
             className="button profile__button profile__button_type_edit"
             onClick={onEditProfile}
           ></button>
-          <p className="profile__job">{about}</p>
+          <p className="profile__job">{escape(about)}</p>
         </div>
         <button
           className="button profile__button profile__button_type_add"

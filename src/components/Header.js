@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import escape from 'escape-html';
 import { Link, useLocation } from 'react-router-dom';
 
 function Header({ isUserLoggedIn, email, onSignOut }) {
@@ -24,7 +25,7 @@ function Header({ isUserLoggedIn, email, onSignOut }) {
             }`}
           >
             <li className="header__nav-item">
-              <p className="header__user-email">{email}</p>
+              <p className="header__user-email">{escape(email)}</p>
             </li>
             <li className="header__nav-item">
               <button
