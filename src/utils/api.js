@@ -61,31 +61,6 @@ class Api {
       headers: this._headers,
     }).then(this._checkServerResponse);
   }
-
-  registerUser(userInfo) {
-    return fetch(`${this._baseUrl}/signup`, {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify(userInfo),
-    }).then(this._checkServerResponse);
-  }
-
-  loginUser(userInfo) {
-    return fetch(`${this._baseUrl}/signin`, {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify(userInfo),
-    }).then(this._checkServerResponse);
-  }
-
-  checkUserValidity() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      headers: {
-        ...this._headers,
-        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-      },
-    }).then(this._checkServerResponse);
-  }
 }
 
 const api = new Api({
@@ -96,11 +71,4 @@ const api = new Api({
   },
 });
 
-const authenticationApi = new Api({
-  baseUrl: 'https://register.nomoreparties.co',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-export { api, authenticationApi };
+export default api;

@@ -13,7 +13,8 @@ import AddPlacePopup from './AddPlacePopup';
 import DeleteCardPopup from './DeleteCardPopup';
 import InfoTooltip from './InfoTooltip';
 import CurrentUserContext from '../contexts/CurrentUserContext';
-import { api, authenticationApi } from '../utils/api';
+import api from '../utils/api';
+import auth from '../utils/auth';
 
 function App() {
   const history = useHistory();
@@ -57,7 +58,7 @@ function App() {
   });
 
   function checkUserValidity() {
-    return authenticationApi
+    return auth
       .checkUserValidity()
       .then(({ data: { email } }) => {
         setEmail(email);
@@ -126,7 +127,7 @@ function App() {
   }
 
   function handleUserLogin(userInfo) {
-    return authenticationApi
+    return auth
       .loginUser(userInfo)
       .then(({ token }) => {
         localStorage.setItem('jwt', token);
@@ -140,7 +141,7 @@ function App() {
   }
 
   function handleUserRegister(userInfo) {
-    return authenticationApi
+    return auth
       .registerUser(userInfo)
       .then((data) => {
         if (data) {
