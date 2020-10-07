@@ -128,8 +128,11 @@ function App() {
   function handleUserRegister(userInfo) {
     return authenticationApi
       .registerUser(userInfo)
-      .then(() => {
-        return handleUserLogin(userInfo);
+      .then((data) => {
+        if (data) {
+          return handleUserLogin(userInfo);
+        }
+        return Promise.reject();
       })
       .then(() => {
         openSuccessTooltip();
