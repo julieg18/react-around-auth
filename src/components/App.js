@@ -33,13 +33,23 @@ function App() {
   const useMountEffect = (func) => useEffect(func, []);
 
   useMountEffect(() => {
-    api.getUser().then((user) => {
-      setCurrentUser(user);
-    });
+    api
+      .getUser()
+      .then((user) => {
+        setCurrentUser(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    api.getInitialCards().then((initialCards) => {
-      setCards(initialCards);
-    });
+    api
+      .getInitialCards()
+      .then((initialCards) => {
+        setCards(initialCards);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     if (localStorage.getItem('jwt')) {
       checkUserValidity();
@@ -47,11 +57,14 @@ function App() {
   });
 
   function checkUserValidity() {
-    authenticationApi.checkUserValidity().then(({ data: { email } }) => {
-      setEmail(email);
-      setIsUserLoggedIn(true);
-      history.push('/');
-    });
+    return authenticationApi
+      .checkUserValidity()
+      .then(({ data: { email } }) => {
+        setEmail(email);
+        setIsUserLoggedIn(true);
+        history.push('/');
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleEscPopupClose(e) {
@@ -119,7 +132,8 @@ function App() {
         localStorage.setItem('jwt', token);
         return checkUserValidity();
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         openErrorTooltip();
         return Promise.reject();
       });
@@ -137,7 +151,8 @@ function App() {
       .then(() => {
         openSuccessTooltip();
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         openErrorTooltip();
         return Promise.reject();
       });
@@ -151,39 +166,64 @@ function App() {
   function handleCardLike(card) {
     const cardWasLiked = !card.likes.some((c) => c._id === currentUser._id);
 
-    api.editCardLikes({ cardWasLiked, cardId: card._id }).then((newCard) => {
-      const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-      setCards(newCards);
-    });
+    api
+      .editCardLikes({ cardWasLiked, cardId: card._id })
+      .then((newCard) => {
+        const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleCardDelete() {
-    return api.deleteCard(selectedCard._id).then(() => {
-      const newCards = cards.filter((c) => c._id !== selectedCard._id);
-      setCards(newCards);
-      closeAllPopups();
-    });
+    return api
+      .deleteCard(selectedCard._id)
+      .then(() => {
+        const newCards = cards.filter((c) => c._id !== selectedCard._id);
+        setCards(newCards);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleUpdateUser(newUserInfo) {
-    return api.editUserInfo(newUserInfo).then((newUserInfo) => {
-      setCurrentUser(newUserInfo);
-      closeAllPopups();
-    });
+    return api
+      .editUserInfo(newUserInfo)
+      .then((newUserInfo) => {
+        setCurrentUser(newUserInfo);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleUpdateAvatar(avatar) {
-    return api.editUserAvatar(avatar).then((newUserInfo) => {
-      setCurrentUser(newUserInfo);
-      closeAllPopups();
-    });
+    return api
+      .editUserAvatar(avatar)
+      .then((newUserInfo) => {
+        setCurrentUser(newUserInfo);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleCreatePlace(place) {
-    return api.addCard(place).then((newCard) => {
-      setCards([newCard, ...cards]);
-      closeAllPopups();
-    });
+    return api
+      .addCard(place)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (

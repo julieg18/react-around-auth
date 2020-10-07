@@ -15,21 +15,13 @@ class Api {
   getUser() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    })
-      .then(this._checkServerResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkServerResponse);
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    })
-      .then(this._checkServerResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkServerResponse);
   }
 
   editUserInfo(newUserInfo) {
@@ -37,11 +29,7 @@ class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify(newUserInfo),
-    })
-      .then(this._checkServerResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkServerResponse);
   }
 
   editUserAvatar(avatar) {
@@ -49,11 +37,7 @@ class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify(avatar),
-    })
-      .then(this._checkServerResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkServerResponse);
   }
 
   addCard(newCardInfo) {
@@ -61,33 +45,21 @@ class Api {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(newCardInfo),
-    })
-      .then(this._checkServerResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkServerResponse);
   }
 
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
-    })
-      .then(this._checkServerResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkServerResponse);
   }
 
   editCardLikes({ cardWasLiked, cardId }) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: cardWasLiked ? 'PUT' : 'DELETE',
       headers: this._headers,
-    })
-      .then(this._checkServerResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkServerResponse);
   }
 
   registerUser(userInfo) {
@@ -95,11 +67,7 @@ class Api {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(userInfo),
-    })
-      .then(this._checkServerResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkServerResponse);
   }
 
   loginUser(userInfo) {
@@ -107,11 +75,7 @@ class Api {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(userInfo),
-    })
-      .then(this._checkServerResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkServerResponse);
   }
 
   checkUserValidity() {
@@ -120,11 +84,7 @@ class Api {
         ...this._headers,
         Authorization: `Bearer ${localStorage.getItem('jwt')}`,
       },
-    })
-      .then(this._checkServerResponse)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkServerResponse);
   }
 }
 
