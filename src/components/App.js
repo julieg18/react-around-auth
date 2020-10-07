@@ -145,7 +145,8 @@ function App() {
       .registerUser(userInfo)
       .then((data) => {
         if (data) {
-          return handleUserLogin(userInfo);
+          history.push('/signin');
+          return Promise.resolve();
         }
         return Promise.reject();
       })
