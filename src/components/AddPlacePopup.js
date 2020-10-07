@@ -47,6 +47,11 @@ function AddPlacePopup({ isOpen, onClose, onCreatePlace }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
+      isFormValid={
+        isNameValid && isLinkValid && name.length > 0 && link.length > 0
+      }
+      submitBtnText="Create"
     >
       <label htmlFor="title-field" className="form__label">
         <input
@@ -92,15 +97,6 @@ function AddPlacePopup({ isOpen, onClose, onCreatePlace }) {
           {linkValidationMessage}
         </span>
       </label>
-      <button
-        type="submit"
-        className="form__submit-button form__submit-button_type_add-card"
-        disabled={
-          !isNameValid || !isLinkValid || name.length === 0 || link.length === 0
-        }
-      >
-        {isLoading ? 'Saving...' : 'Create'}
-      </button>
     </PopupWithForm>
   );
 }

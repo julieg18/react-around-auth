@@ -19,11 +19,10 @@ function DeleteCardPopup({ isOpen, onClose, onDeleteCard }) {
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
-    >
-      <button className="form__submit-button form__submit-button_type_delete-card">
-        {isLoading ? 'Saving...' : 'Yes'}
-      </button>
-    </PopupWithForm>
+      isLoading={isLoading}
+      isFormValid={true}
+      submitBtnText="Yes"
+    />
   );
 }
 

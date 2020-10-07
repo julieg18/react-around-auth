@@ -54,6 +54,9 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
+      isFormValid={isNameValid && isDescriptionValid}
+      submitBtnText="Save"
     >
       <label className="form__label" htmlFor="name-field">
         <input
@@ -100,13 +103,6 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
           {descriptionValidationMessage}
         </span>
       </label>
-      <button
-        type="submit"
-        className="form__submit-button form__submit-button_type_edit-profile"
-        disabled={!isNameValid || !isDescriptionValid}
-      >
-        {isLoading ? 'Saving...' : 'Save'}
-      </button>
     </PopupWithForm>
   );
 };

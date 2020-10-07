@@ -35,6 +35,9 @@ function EditAvatarProfilePopup({ isOpen, onClose, onUpdateAvatar }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
+      isFormValid={isFormValid}
+      submitBtnText="Save"
     >
       <label htmlFor="avatar-img-field" className="form__label">
         <input
@@ -57,13 +60,6 @@ function EditAvatarProfilePopup({ isOpen, onClose, onUpdateAvatar }) {
           {avatarValidationMessage}
         </span>
       </label>
-      <button
-        type="submit"
-        className="form__submit-button form__submit-button_type_change-avatar"
-        disabled={!isFormValid}
-      >
-        {isLoading ? 'Saving...' : 'Save'}
-      </button>
     </PopupWithForm>
   );
 }
