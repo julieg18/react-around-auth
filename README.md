@@ -1,4 +1,5 @@
 [See Finished Project](https://julieg18.github.io/react-around-auth/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
