@@ -1,4 +1,4 @@
-[See Finished Project](https://julieg18.github.io/react-around-auth/)
+[See Finished Project](https://www.around-usa.students.nomoreparties.site/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
