@@ -82,7 +82,6 @@ function Register({ onRegister }) {
             }`}
             id="password-field"
             minLength="6"
-            maxLength="30"
             pattern="\S+"
             required
           />

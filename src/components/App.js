@@ -60,9 +60,11 @@ function App() {
   function checkUserValidity() {
     return auth
       .checkUserValidity()
-      .then(({ data: { email } }) => {
+      .then((user) => {
+        const { email } = user;
         setEmail(email);
         setIsUserLoggedIn(true);
+        setCurrentUser(user);
         history.push('/');
       })
       .catch((err) => console.log(err));
@@ -161,8 +163,15 @@ function App() {
   }
 
   function handleUserSignout() {
-    localStorage.removeItem('jwt');
-    setIsUserLoggedIn(false);
+    return auth
+      .logoutUser()
+      .then(() => {
+        setIsUserLoggedIn(false);
+      })
+      .catch((err) => {
+        openErrorTooltip();
+        console.log(err);
+      });
   }
 
   function handleCardLike(card) {

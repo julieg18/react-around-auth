@@ -21,25 +21,31 @@ class Auth {
   }
 
   loginUser(userInfo) {
-    return fetch(`${this._baseUrl}/signin`, {
+    return fetch(`${this._baseUrl}/login`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(userInfo),
     }).then(this._checkServerResponse);
   }
 
+  logoutUser() {
+    return fetch(`${this._baseUrl}/logout`, {
+      method: 'DELETE',
+      headers: this._headers,
+    }).then(this._checkServerResponse);
+  }
+
   checkUserValidity() {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}/me`, {
       headers: {
         ...this._headers,
-        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
       },
     }).then(this._checkServerResponse);
   }
 }
 
 const auth = new Auth({
-  baseUrl: 'https://register.nomoreparties.co',
+  baseUrl: '/api/users',
   headers: {
     'Content-Type': 'application/json',
   },

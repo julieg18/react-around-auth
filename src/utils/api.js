@@ -8,7 +8,7 @@ class Api {
     if (res.ok) {
       return res.json();
     }
-
+    console.log('tis the res', res);
     return Promise.reject(`Err: ${res.status}`);
   }
 
@@ -56,7 +56,7 @@ class Api {
   }
 
   editCardLikes({ cardWasLiked, cardId }) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: cardWasLiked ? 'PUT' : 'DELETE',
       headers: this._headers,
     }).then(this._checkServerResponse);
@@ -64,9 +64,8 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://around.nomoreparties.co/v1/group-1',
+  baseUrl: '/api',
   headers: {
-    authorization: 'b5addf89-e4e2-4334-ba86-da0986124fda',
     'Content-Type': 'application/json',
   },
 });

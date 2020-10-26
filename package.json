@@ -1,7 +1,7 @@
 {
   "name": "react-around-auth",
   "version": "0.1.0",
-  "homepage": "https://julieg18.github.io/react-around-auth",
+  "homepage": ".",
   "dependencies": {
     "cra-template": "1.0.3",
     "escape-html": "^1.0.3",
@@ -15,7 +15,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "scp -r -i C:\/Users\/jujug\/workspace\/various-files\/around_key.pem ./build/* jewels@52.142.7.101:/home/jewels/around-frontend",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
